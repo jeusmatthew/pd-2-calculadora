@@ -20,27 +20,31 @@ Entre las ventajas y desventajas de la resolución del problema Orientado a Obje
 |---|---|
 |"6/2*(1+2)"|9|
 |"1/2"|0.5|
-|"(1+2)/0"| "Error: division entre 0"
+|"(1+2)/0"| "Error: division entre 0"|
+|"1++2" |"Error: no se permite dos operadores seguidos ++"|
+|"1/(-2)+2" |"Error: division entre 0"|
+|"-" |"Error: no se puede iniciar con el operador -"|
 
 ## Proceso
-1. Guarda la entrada del usuario en una cadena _expresión_
-2. Verifica que la cadena _expresión_ sea válida, que no contenga errores lexicos o sintacticos, si los contiene que termine la ejecución del programa
-3. Convertir la cadena _expresión_ a posfija y guardarla en una nueva cadena _expresionPosfija_
-4. Analizar la cadena _expresionPosfija_ y retornar el resultado en flotante
+1. Verifica que la cadena _expresión_ sea válida, que no contenga errores lexicos o sintacticos, si los contiene que termine la ejecución del programa
+2. Convertir la cadena _expresión_ a posfija y guardarla en una nueva cadena _expresionPosfija_
+3. Analizar la cadena _expresionPosfija_ y retornar el resultado en flotante
 
-De este proceso extraemos tres clases principales
+## Clases
+
+Del proceso anterior extraemos tres clases principales:
 - Verificador
 - ConvertidorPosfija
 - Analizador
 
 ``` mermaid
 ---
-title: Diagrama UML
+title: Diagrama
 ---
 
 classDiagram
     class Verificador {
-		+ esValido() bool
+		+ esValido() bool 
 		- errorLexico() bool
 		- errorSintax() bool
 	}
@@ -55,6 +59,11 @@ classDiagram
 	class Analizador{
 		+ resolverPosfija(string) string
 	}
-
-    
 ```
+
+### Verificador
+Se encarga de verificar si la cadena contiene algun error léxico o sintactico
+
+### Conversor
+
+### Analizador
