@@ -1,13 +1,18 @@
 
-- Documentación (md) de las diferencias fundamentales de una implementación de OO vs Estructurada (ventajas o desventajas). **Es importante explicar las abstracciones y relaciones entre clases.** Mantener los principios de *modularidad*, _cohesión_ y responsabilidad única.
 
+
+> # Instrucciones
+> - Documentación (md) de las diferencias fundamentales de una implementación de OO vs Estructurada (ventajas o desventajas). **Es importante explicar las abstracciones y relaciones entre clases.** Mantener los principios de *modularidad*, _cohesión_ y responsabilidad única.
+
+# Calculadora 
+Esta calculadora resuelve expresiones aritmeticas, los operadores aceptados son + - * / y (). Las expresiones consideran unicamente datos enteros positivos y negativos 
+
+Entre las ventajas y desventajas de la resolución del problema Orientado a Objetos frente a Estructurada son:
 
 |Ventajas | Desventajas|
 |----------|-----------|
-||a|
+|Permite una mejor organización ya que en OO a una clase se le puede asignar métodos (funciones) y atributos (datos). De esta forma, a cada clase se le puede delegar una unica responsabilidad, lo cual permite mejorar la modularidad y cohesion del programa, permitiendo la reultilización de codigo a futuro, asi como una mejor mantenibilidad. |El proceso de abstración del problema normalmente es más complejo, ya que se debe entender el problema profundamente antes de crear cualquier clase, en caso contrario, la resolucion al problema será redundante o complicada, a comparación de Estructurada|
 
-
-# Algoritmo de la calc
 
 ## Entrada / Salidas
 
