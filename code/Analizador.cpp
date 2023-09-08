@@ -1,25 +1,13 @@
 #include "Analizador.h"
 
-double Analizador::resolverPosfija(string expresion)
+string Analizador::resolverPosfija(deque<int> expresion)
 {
 	double op1 = 0.0, op2 = 0.0, resultado = 0.0;
 	stack<double> pila;
 
-	for (int i = 0; i < expresion.length(); i++)
+	for (int c : expresion)
 	{
-		char c = expresion[i], nextC = expresion[i + 1];
-		// (- '0') convierte a entero 
-		if (isdigit(c))
-		{
-			if (nextC == '-')
-			{
-				pila.push((c - '0') * -1);
-				i++; //Salta el siguiente elemento (operador) para que le siga el operando2
-			}
-			else
-				pila.push(c - '0');
-		}
-		else
+		if(esOperador(c))
 		{
 			op2 = pila.top();
 			pila.pop();
@@ -40,15 +28,19 @@ double Analizador::resolverPosfija(string expresion)
 			case '/':
 				if (op2 == 0)
 				{
-					cout << "Error: Division entre 0!" << endl;
-					return 0;
+					return "Error: Division entre 0!\n";
 				}
-				resultado = static_cast<double>(op1) / op2;
+				resultado = (double)(op1) / op2;
 				break;
 			}
 			pila.push(resultado);
 		}
+		else
+		{
+			pila.push(expresion.front());
+			expresion.pop_front();
+		}
 	}
 
-	return pila.top();
+	return to_string(pila.top());
 }

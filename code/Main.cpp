@@ -1,21 +1,25 @@
 #include <iostream>
+#include <string>
 
 #include "Verificador.h"
-#include "Conversor.h"
-#include "Analizador.h"
+#include "Postfix.h"
 
 using namespace std;
 
 int main()
 {
-    string expresion = "(-4)/((-2)+2)",
-        expresionPosfija = "";
-    double resultado = 0.0;
+    string expresion = "(-1)/((-2)+2)", resultado = "";
+    Postfix posfija(expresion);
 
     if (Verificador::esValida(expresion)) {
-        expresionPosfija = Conversor::convertirPosfija(expresion);
-        cout << expresionPosfija<<endl;
-        resultado = Analizador::resolverPosfija(expresionPosfija);
-        cout << "Resultado: " << resultado<<endl;
+        resultado = posfija.resolve();
+        try
+        { 
+            cout << stod(resultado)<<endl;
+        }
+        catch (const std::exception&)
+        {
+            cout << resultado<<endl;
+        }
     }
 }
