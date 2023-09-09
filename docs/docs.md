@@ -1,4 +1,3 @@
-
 # Calculadora 
 Esta calculadora resuelve expresiones aritmeticas, los operadores aceptados son + - * / y (). Las expresiones consideran unicamente datos enteros positivos y negativos 
 
@@ -14,11 +13,11 @@ Entre las ventajas y desventajas de la resolución del problema Orientado a Obje
 |Entrada | Salida |
 |---|---|
 |`"6/2*(1+2)"`|9|
-|"1/2"|0.5|
-|"(1+2)/0"| "Error: division entre 0"|
-|"1++2" |"Error: no se permite dos operadores seguidos ++"|
-|"1/(-2)+2" |"Error: division entre 0"|
-|"-" |"Error: no se puede iniciar con el operador -"|
+|`"1/2"`|0.5|
+|`"(1+2)/0"`| "Error: division entre 0"|
+|`"1++2"` |"Error: no se permite dos operadores seguidos ++"|
+|`"1/(-2)+2"` |"Error: division entre 0"|
+|`"-"` |"Error: no se puede iniciar con el operador -"|
 
 ## Proceso
 1. Verifica que la cadena _expresión_ sea válida, que no contenga errores lexicos o sintacticos, si los contiene que termine la ejecución del programa
