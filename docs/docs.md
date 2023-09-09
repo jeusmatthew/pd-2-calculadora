@@ -1,9 +1,4 @@
 
-
-
-> # Instrucciones
-> - Documentación (md) de las diferencias fundamentales de una implementación de OO vs Estructurada (ventajas o desventajas). **Es importante explicar las abstracciones y relaciones entre clases.** Mantener los principios de *modularidad*, _cohesión_ y responsabilidad única.
-
 # Calculadora 
 Esta calculadora resuelve expresiones aritmeticas, los operadores aceptados son + - * / y (). Las expresiones consideran unicamente datos enteros positivos y negativos 
 
@@ -18,7 +13,7 @@ Entre las ventajas y desventajas de la resolución del problema Orientado a Obje
 
 |Entrada | Salida |
 |---|---|
-|"6/2*(1+2)"|9|
+|`"6/2*(1+2)"`|9|
 |"1/2"|0.5|
 |"(1+2)/0"| "Error: division entre 0"|
 |"1++2" |"Error: no se permite dos operadores seguidos ++"|
@@ -34,36 +29,83 @@ Entre las ventajas y desventajas de la resolución del problema Orientado a Obje
 
 Del proceso anterior extraemos tres clases principales:
 - Verificador
-- ConvertidorPosfija
+- Conversor
 - Analizador
+- Postfix
 
 ``` mermaid
----
-title: Diagrama
----
-
 classDiagram
     class Verificador {
-		+ esValido() bool 
-		- errorLexico() bool
-		- errorSintax() bool
+		+ esValido() bool $
+		- errorLexico() bool$
+		- errorSintax() bool$
 	}
 	class Conversor{
-		+ convertirPosfija(string) string
-		- compararPresedencia(char, char) int
-		- verificarJerarquia(char) int
-		- esOperador(char) bool
-		- esParentesis(char) bool
+		+ convertirPosfija(string) deque(string)$
+		- compararPresedencia(char, char) int$
+		- verificarJerarquia(char) int$
+		- esOperador(char) bool$
+		- esParentesis(char) bool$
 	}
 
 	class Analizador{
-		+ resolverPosfija(string) string
+		+ resolverPosfija(deque(string)) string$
 	}
+
+	class Postfix{
+		-value : deque(string)
+		+Postfix(string)
+        +resolve() string
+	}
+
+Postfix  ..>  Conversor
+Postfix  ..>  Analizador
+
 ```
 
 ### Verificador
 Se encarga de verificar si la cadena contiene algun error léxico o sintactico
 
+
+#### Métodos
+|Tipo|Metodo y descr.|
+|---|---|
+|`static bool`|`esValido(string expresion)`<br>Devuelve si la cadena enviada es una expresion aritmética válida.|
+|`static bool`|`errorLexico(string expresion)`<br>Detecta si la cadena enviada contiene algun error Léxico.|
+|`static bool`|`errorSintax(string expresion)`<br>Verifica si la cadena contiene algún error sintáctico.|
+
 ### Conversor
+Contiene utilerías necesarias para la conversión a postfija.
+
+#### Métodos
+|Tipo|Metodo y descr.|
+|---|---|
+|`static string`|`convertirPosfija(string expresion)`<br>Convierte la cadena aritmética de entrada a notación postfija en forma de deque.|
+|`static int`|`compararPresedencia(char op1, char op2)`<br>Verifica la jerarquía aritmética del operador 1 con el operador 2, devuelve `>0` si c1 es mayor, `0` si son de igual jerarquía o `<0` si c1 es de menor jerarquía.|
+|`static int`|`verificarJerarquia(char op)`<br>Devuelve la jerarquía aritmética del operador.|
+|`static bool`|`esOperador(char c)`<br>Devuelve si el caracter enviado es un operador (`+ - * /`)|
+|`static bool`|`esParentesis(char c)`<br>Devuelve si el carácter es un paréntesis `(` ó `)`|
 
 ### Analizador
+Tiene utilerías para la conversión de postfija a su resultado concreto.
+
+#### Métodos
+|Tipo|Metodo y descr.|
+|---|---|
+|`static string`|`resolverPosfija(deque(string) expresion)`<br>Convierte el deque de entrada de notación postfija a el resultado aritmético que representa, devuelve una excepción en caso de encontrarse.|
+
+
+
+### Postfix
+Es un contenedor de la expresión postfija, la cual se puede inicializar y resolver con su método.
+
+#### Atributos
+* `deque(string) valor`<br>Es un deque que almacena los operadores y operandos de una expresión postfija en forma de cadenas. Ejemplo:<br>`(cadena original)"22+23" -> (deque(string))|"22"|"23"|+"|`
+
+#### Métodos
+
+|Tipo|Metodo y descr.|
+|---|---|
+|Constructor|`Postfix(string original)`<br>Inicializa la expresion postfija usando una expresion aritmetica.|
+|`string`|`resolve()`<br>Devuele la expresion postfija resuelta o error si encuenta una división entre 0.|
+
