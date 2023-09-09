@@ -5,7 +5,7 @@
 class Postfix
 {
 private:
-	deque<int> value;
+	deque<string> value;
 public:
 	Postfix(string);
 	string resolve();

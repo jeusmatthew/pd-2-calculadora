@@ -1,20 +1,20 @@
 #include "Analizador.h"
 
-string Analizador::resolverPosfija(deque<int> expresion)
+string Analizador::resolverPosfija(deque<string> expresion)
 {
 	double op1 = 0.0, op2 = 0.0, resultado = 0.0;
 	stack<double> pila;
 
-	for (int c : expresion)
+	for (string str : expresion)
 	{
-		if(esOperador(c))
+		if(str.length() == 1 && esOperador(str.at(0)))
 		{
 			op2 = pila.top();
 			pila.pop();
 			op1 = pila.top();
 			pila.pop();
 
-			switch (c)
+			switch (str.at(0))
 			{
 			case '+':
 				resultado = op1 + op2;
@@ -37,10 +37,11 @@ string Analizador::resolverPosfija(deque<int> expresion)
 		}
 		else
 		{
-			pila.push(expresion.front());
+			pila.push(stod(str));
 			expresion.pop_front();
 		}
 	}
 
 	return to_string(pila.top());
+	// return "";
 }

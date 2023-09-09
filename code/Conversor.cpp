@@ -42,12 +42,13 @@ bool Conversor::esNumero(string str)
 	return true;
 }
 
-deque<int> Conversor::convertirPosfija(string expresion)
+deque<string> Conversor::convertirPosfija(string expresion)
 {
 	//string salida;
-	deque<int> salida;
-	stack<int> pila;
+	deque<string> salida;
+	stack<char> pila;
 	string number = "";
+	string cToS = "";
 
 	for (int i = 0; expresion[i] != '\0'; i++)
 	{
@@ -62,7 +63,7 @@ deque<int> Conversor::convertirPosfija(string expresion)
 		{
 			if (!number.empty())
 			{
-				salida.push_back(stoi(number));
+				salida.push_back(number);
 				number = "";
 			}
 
@@ -72,7 +73,7 @@ deque<int> Conversor::convertirPosfija(string expresion)
 			{
 				while (!pila.empty() && pila.top() != '(')
 				{
-					salida.push_back(pila.top());
+					salida.push_back(string(1, pila.top()));
 					pila.pop();
 				}
 				if (pila.top() == '(')
@@ -84,7 +85,7 @@ deque<int> Conversor::convertirPosfija(string expresion)
 			{
 				while (!pila.empty() && compararPresedencia(pila.top(), c) >= 0)
 				{
-					salida.push_back(pila.top());
+					salida.push_back(string(1, pila.top()));
 					pila.pop();
 				}
 				pila.push(c);
@@ -94,13 +95,13 @@ deque<int> Conversor::convertirPosfija(string expresion)
 
 	if (!number.empty())
 	{
-		salida.push_back(stoi(number));
+		salida.push_back(number);
 		number = "";
 	}
 
 	while (!pila.empty())
 	{
-		salida.push_back(pila.top());
+		salida.push_back(string(1, pila.top()));
 		pila.pop();
 	}
 

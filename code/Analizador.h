@@ -14,6 +14,6 @@ class Analizador
 private:
 
 public:
-	static string resolverPosfija(deque<int>);
+	static string resolverPosfija(deque<string>);
 };
 

@@ -16,6 +16,6 @@ private:
 	static int verificarJerarquia(char);
 	static bool esNumero(string);
 public:
-	static deque<int> convertirPosfija(string);
+	static deque<string> convertirPosfija(string);
 };
 

@@ -2,17 +2,16 @@
 
 bool Verificador::errorLexico(string expresion)
 {
-	bool error = false;
 	for (char c : expresion)
 	{
 		if (!isdigit(c) && !esOperador(c) && !esParenteris(c))
 		{
 			cout << "Error lexico en el catacter: " << c << endl;
-			error = true;
+			return true;
 		}
 	}
 
-	return error;
+	return false;
 }
 
 bool Verificador::errorSintax(string expresion)
@@ -69,12 +68,12 @@ bool Verificador::errorSintax(string expresion)
 		// manejo de digitos
 		else if (isdigit(c))
 		{
-			if (isdigit(nextC))
-			{
-				cout << "Error: no se permiten dos caracteres seguidos " << c << nextC << endl;
-				error = true;
-			}
-			else if (nextC == '(')
+			// if (isdigit(nextC))
+			// {
+			// 	cout << "Error: no se permiten dos caracteres seguidos " << c << nextC << endl;
+			// 	error = true;
+			// }
+			if (nextC == '(')
 			{
 				cout << "Error: se esperaba un producto en " << c << " para efectuar la operacion" << endl;
 				error = true;
@@ -99,7 +98,7 @@ bool Verificador::errorSintax(string expresion)
 			}
 			else if (c == '/' && nextC == '0')
 			{
-				cout << "Error: división entre 0." << endl;
+				cout << "Error: divisiï¿½n entre 0." << endl;
 			}
 		}
 	}
